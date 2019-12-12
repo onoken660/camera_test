@@ -1,6 +1,8 @@
 const medias = {
   audio : false,
-  video : true
+	video: {
+		facingMode: {exact:"environment"}	
+	}
 };
 function init_video() {
   if (navigator.mediaDevices) {
