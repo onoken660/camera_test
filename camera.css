@@ -3,11 +3,6 @@ body {
   background: #000;
 }
 
-#video {
-  display: block;
-  width: 100%;
-}
-
 div #layer {
 display: none;
 position: fixed;
