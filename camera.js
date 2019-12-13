@@ -27,11 +27,15 @@ function errorCallback(err) {
 };
 
 function popup_show() {
-  alert('popup_show()');
+	document.getElementById('layer').style.display = 'block';
+	document.getElementById('popup').style.display = 'block';
 }
 function popup_hide() {
-  alert('popup_hide()');
+	document.getElementById('layer').style.display = 'none';
+	document.getElementById('popup').style.display = 'none';
 }
+
 function take_pict() {
   alert('take_pict()');
+  popup_hide();
 }
