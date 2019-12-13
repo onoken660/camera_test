@@ -1,7 +1,7 @@
 const medias = {
   audio : false,
 	video: {
-		facingMode: {exact:"environment"}	
+		facingMode: {exact:"user"}	
 	}
 };
 function init_video() {
