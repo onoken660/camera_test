@@ -698,13 +698,13 @@ function SeiTrim( x_value ) {
   }
   var p_start = 0, p_end = x_value.length;
   while( p_start < p_end ) {
-    if( x_value.charAt(p_start) != ' ' && x_value.charAt(p_start) != 'Å@' ) {
+    if( x_value.charAt(p_start) != ' ' && x_value.charAt(p_start) != '„ÄÄ' ) {
       break;
     }
     p_start ++;
   }
   while( p_end > 0 ) {
-    if( x_value.charAt(p_end-1) != ' ' && x_value.charAt(p_end-1) != 'Å@' ) {
+    if( x_value.charAt(p_end-1) != ' ' && x_value.charAt(p_end-1) != '„ÄÄ' ) {
       break;
     }
     p_end --;
@@ -725,7 +725,7 @@ function SeiRemoveComma( x_value ) {
         if( i != 0 ) return x_value;
         continue;
     }
-    if( p_ch != ' ' && p_ch != 'Å@' && (p_ch < '0' || p_ch > '9') && (p_ch < 'ÇO' || p_ch > 'ÇX') && p_ch != ',' ) {
+    if( p_ch != ' ' && p_ch != '„ÄÄ' && (p_ch < '0' || p_ch > '9') && (p_ch < 'Ôºê' || p_ch > 'Ôºô') && p_ch != ',' ) {
       if( p_ch == '.' && p_dec_c ++ == 0 ) {
         continue;
       }
@@ -752,14 +752,14 @@ function SeiEditComma( x_value ) {
   if (typeof(x_value) == 'number') x_value = x_value.toString();
   if( !x_value ) return '';
   var i, p_value = SeiTrim(''+x_value), p_value2 = '', p_dec_c = 0;
-  p_value = p_value.replace(/Å@/g, '');
+  p_value = p_value.replace(/„ÄÄ/g, '');
   for( i=0; i<p_value.length; i++ ) {
     var p_ch = p_value.charAt( i );
     if( p_ch == '+' || p_ch == '-' ) {
         if( i != 0 ) return x_value;
         continue;
     }
-    if( p_ch != ' ' && p_ch != 'Å@' && (p_ch < '0' || p_ch > '9') && (p_ch < 'ÇO' || p_ch > 'ÇX') && p_ch != ',' ) {
+    if( p_ch != ' ' && p_ch != '„ÄÄ' && (p_ch < '0' || p_ch > '9') && (p_ch < 'Ôºê' || p_ch > 'Ôºô') && p_ch != ',' ) {
       if( p_ch == '.' && p_dec_c ++ == 0 ) {
         continue;
       }
@@ -811,7 +811,7 @@ function SeiTrimZero( x_value ) {
   var p_pos = 0, p_value2 = null;
   while( true ) {
     var p_pos2 = x_value.indexOf( ' ', p_pos );
-    var p_pos3 = x_value.indexOf( 'Å@', p_pos );
+    var p_pos3 = x_value.indexOf( '„ÄÄ', p_pos );
     if( p_pos3 >= 0 && p_pos3 < p_pos2 ) p_pos2 = p_pos3;
     if( p_pos2 < 0 ) {
       if( p_value2 != null ) {
@@ -830,7 +830,7 @@ function SeiTrimZero( x_value ) {
   var p_start = p_sign;
   while( p_start < x_value.length ) {
     var p_ch = x_value.charAt( p_start );
-    if( p_ch != '0' && p_ch != 'ÇO' ) {
+    if( p_ch != '0' && p_ch != 'Ôºê' ) {
       break;
     }
     p_start++;
@@ -934,7 +934,7 @@ function SeiPadding(x_value, x_len, x_pad) {
   for (var i=x_value.length; i<x_len; i++) x_value = x_pad + x_value;
   return x_value;
 }
-var g_seiZen = 'ÇOÇPÇQÇRÇSÇTÇUÇVÇWÇXÇ`ÇaÇbÇcÇdÇeÇfÇgÇhÇiÇjÇkÇlÇmÇnÇoÇpÇqÇrÇsÇtÇuÇvÇwÇxÇyÇÅÇÇÇÉÇÑÇÖÇÜÇáÇàÇâÇäÇãÇåÇçÇéÇèÇêÇëÇíÇìÇîÇïÇñÇóÇòÇôÇöÅQÅ@Å\Å|Å`';
+var g_seiZen = 'ÔºêÔºëÔºíÔºìÔºîÔºïÔºñÔºóÔºòÔºôÔº°Ôº¢Ôº£Ôº§Ôº•Ôº¶ÔºßÔº®Ôº©Ôº™Ôº´Ôº¨Ôº≠ÔºÆÔºØÔº∞Ôº±Ôº≤Ôº≥Ôº¥ÔºµÔº∂Ôº∑Ôº∏ÔºπÔº∫ÔΩÅÔΩÇÔΩÉÔΩÑÔΩÖÔΩÜÔΩáÔΩàÔΩâÔΩäÔΩãÔΩåÔΩçÔΩéÔΩèÔΩêÔΩëÔΩíÔΩìÔΩîÔΩïÔΩñÔΩóÔΩòÔΩôÔΩöÔºø„ÄÄ‚ÄïÔºçÔΩû';
 var g_seiHan = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_ --~';
 function SeiZenToHan(x_value) {
   if (x_value == null) return x_value;
@@ -952,14 +952,14 @@ function SeiZenToHan(x_value) {
   return p_ret || x_value;
 }
 var g_seiWarekiEra = {
-  'MEIJI' : new Array(1868,'ñæé°','ñæé°','MEIJI','ñæ','M','m','áç'),
-  'TAISHO' : new Array(1912,'ëÂê≥','ëÂê≥','TAISHO','TAISYO','TAISHOU','TAISYOU','ëÂ','T','t','áé'),
-  'SHOWA' : new Array(1926,'è∫òa','è∫òa','SHOWA','SHOUWA','SYOWA','SYOUWA','è∫','S','s','áè'),
-  'HEISEI' : new Array(1989,'ïΩê¨','ïΩê¨','HEISEI','ïΩ','H','h','á~'),
-  'REIWA' : new Array(2019,'óﬂòa','óﬂòa','REIWA','óﬂ','R','r')};
+  'MEIJI' : new Array(1868,'ÊòéÊ≤ª','ÊòéÊ≤ª','MEIJI','Êòé','M','m','„çæ'),
+  'TAISHO' : new Array(1912,'Â§ßÊ≠£','Â§ßÊ≠£','TAISHO','TAISYO','TAISHOU','TAISYOU','Â§ß','T','t','„çΩ'),
+  'SHOWA' : new Array(1926,'Êò≠Âíå','Êò≠Âíå','SHOWA','SHOUWA','SYOWA','SYOUWA','Êò≠','S','s','„çº'),
+  'HEISEI' : new Array(1989,'Âπ≥Êàê','Âπ≥Êàê','HEISEI','Âπ≥','H','h','„çª'),
+  'REIWA' : new Array(2019,'‰ª§Âíå','‰ª§Âíå','REIWA','‰ª§','R','r')};
 
 function SeiParseDateDayOfWeek(x_value) {
-  var p_dow = ['ì˙','ì˙ójì˙','åé','åéójì˙','âŒ','âŒójì˙','êÖ','êÖójì˙','ñÿ','ñÿójì˙','ã‡','ã‡ójì˙','ìy','ìyójì˙'];
+  var p_dow = ['Êó•','Êó•ÊõúÊó•','Êúà','ÊúàÊõúÊó•','ÁÅ´','ÁÅ´ÊõúÊó•','Ê∞¥','Ê∞¥ÊõúÊó•','Êú®','Êú®ÊõúÊó•','Èáë','ÈáëÊõúÊó•','Âúü','ÂúüÊõúÊó•'];
   for (var i=0; i<p_dow.length; i++) {
     if (p_dow[i] == x_value) return i / 2;
   }
@@ -1054,7 +1054,7 @@ function SeiParseDate( x_value ){
 }
 
 function SeiParseDateWarekiDayOfWeek(x_value) {
-  var p_dow = ['ì˙','ì˙ójì˙','åé','åéójì˙','âŒ','âŒójì˙','êÖ','êÖójì˙','ñÿ','ñÿójì˙','ã‡','ã‡ójì˙','ìy','ìyójì˙'];
+  var p_dow = ['Êó•','Êó•ÊõúÊó•','Êúà','ÊúàÊõúÊó•','ÁÅ´','ÁÅ´ÊõúÊó•','Ê∞¥','Ê∞¥ÊõúÊó•','Êú®','Êú®ÊõúÊó•','Èáë','ÈáëÊõúÊó•','Âúü','ÂúüÊõúÊó•'];
   for (var i=0; i<p_dow.length; i++) {
     if (p_dow[i] == x_value) return i / 2;
   }
@@ -1140,11 +1140,11 @@ function SeiParseDateWareki(x_value){
   if (p_sldix < 0 && p_dodix < 0 || p_midix > 0 && p_midix < p_sldix) p_delim = '-';
   else if( p_sldix < 0 && p_dodix > 0 ) p_delim = '.';
   p_y = p_m = p_d = NaN;
-  var p_yidx = p_date.indexOf('îN');
+  var p_yidx = p_date.indexOf('Âπ¥');
   if (p_yidx > 0) {
-    var p_midx = p_date.indexOf('åé', p_yidx+1);
+    var p_midx = p_date.indexOf('Êúà', p_yidx+1);
     if (p_midx > 0) {
-      var p_didx = p_date.indexOf('ì˙', p_midx+1);
+      var p_didx = p_date.indexOf('Êó•', p_midx+1);
       if (p_didx > 0) {
         p_y = SeiTrim(p_date.substring(0, p_yidx));
         p_m = SeiTrim(p_date.substring(p_yidx+1, p_midx))
@@ -1307,9 +1307,9 @@ function SeiParseDateYMWareki(x_value){
   if (p_sldix < 0 && p_dodix < 0 || p_midix > 0 && p_midix < p_sldix) p_delim = '-';
   else if( p_sldix < 0 && p_dodix > 0 ) p_delim = '.';
   p_y = p_m = p_d = NaN;
-  var p_yidx = p_date.indexOf('îN');
+  var p_yidx = p_date.indexOf('Âπ¥');
   if (p_yidx > 0) {
-    var p_midx = p_date.indexOf('åé', p_yidx+1);
+    var p_midx = p_date.indexOf('Êúà', p_yidx+1);
     if (p_midx > 0) {
       p_y = SeiTrim(p_date.substring(0, p_yidx));
       p_m = SeiTrim(p_date.substring(p_yidx+1, p_midx))
@@ -1365,12 +1365,12 @@ function SeiEditDateWareki(x_date) {
   }
   var p_date = new Date( x_date );
   var p_year = p_date.getFullYear();
-  if (-3197178000000<=p_date.getTime() && p_date.getTime()<-1812186000001) p_year = 'ñæé°' + (p_year - 1868 + 1);
-  if (-1812186000000<=p_date.getTime() && p_date.getTime()<-1357635600001) p_year = 'ëÂê≥' + (p_year - 1912 + 1);
-  if (-1357635600000<=p_date.getTime() && p_date.getTime()<600188399999) p_year = 'è∫òa' + (p_year - 1926 + 1);
-  if (600188400000<=p_date.getTime() && p_date.getTime()<1556636399999) p_year = 'ïΩê¨' + (p_year - 1989 + 1);
-  if (p_date.getTime()>=1556636400000) p_year = 'óﬂòa' + (p_year - 2019 + 1);
-  return p_year + 'îN' + (p_date.getMonth()<9 ? '0' : '') + (p_date.getMonth()+1) + 'åé' + (p_date.getDate()<10 ? '0' : '') + p_date.getDate() + 'ì˙';
+  if (-3197178000000<=p_date.getTime() && p_date.getTime()<-1812186000001) p_year = 'ÊòéÊ≤ª' + (p_year - 1868 + 1);
+  if (-1812186000000<=p_date.getTime() && p_date.getTime()<-1357635600001) p_year = 'Â§ßÊ≠£' + (p_year - 1912 + 1);
+  if (-1357635600000<=p_date.getTime() && p_date.getTime()<600188399999) p_year = 'Êò≠Âíå' + (p_year - 1926 + 1);
+  if (600188400000<=p_date.getTime() && p_date.getTime()<1556636399999) p_year = 'Âπ≥Êàê' + (p_year - 1989 + 1);
+  if (p_date.getTime()>=1556636400000) p_year = '‰ª§Âíå' + (p_year - 2019 + 1);
+  return p_year + 'Âπ¥' + (p_date.getMonth()<9 ? '0' : '') + (p_date.getMonth()+1) + 'Êúà' + (p_date.getDate()<10 ? '0' : '') + p_date.getDate() + 'Êó•';
 }
 function SeiEditDateYM(x_date) {
   if( x_date == null || x_date == 0 ) {
@@ -1385,12 +1385,12 @@ function SeiEditDateYMWareki(x_date) {
   }
   var p_date = new Date( x_date );
   var p_year = p_date.getFullYear();
-  if (-3197178000000<=p_date.getTime() && p_date.getTime()<-1812186000001) p_year = 'ñæé°' + (p_year - 1868 + 1);
-  if (-1812186000000<=p_date.getTime() && p_date.getTime()<-1357635600001) p_year = 'ëÂê≥' + (p_year - 1912 + 1);
-  if (-1357635600000<=p_date.getTime() && p_date.getTime()<600188399999) p_year = 'è∫òa' + (p_year - 1926 + 1);
-  if (600188400000<=p_date.getTime() && p_date.getTime()<1556636399999) p_year = 'ïΩê¨' + (p_year - 1989 + 1);
-  if (p_date.getTime()>=1556636400000) p_year = 'óﬂòa' + (p_year - 2019 + 1);
-  return p_year + 'îN' + (p_date.getMonth()<9 ? '0' : '') + (p_date.getMonth()+1) + 'åé';
+  if (-3197178000000<=p_date.getTime() && p_date.getTime()<-1812186000001) p_year = 'ÊòéÊ≤ª' + (p_year - 1868 + 1);
+  if (-1812186000000<=p_date.getTime() && p_date.getTime()<-1357635600001) p_year = 'Â§ßÊ≠£' + (p_year - 1912 + 1);
+  if (-1357635600000<=p_date.getTime() && p_date.getTime()<600188399999) p_year = 'Êò≠Âíå' + (p_year - 1926 + 1);
+  if (600188400000<=p_date.getTime() && p_date.getTime()<1556636399999) p_year = 'Âπ≥Êàê' + (p_year - 1989 + 1);
+  if (p_date.getTime()>=1556636400000) p_year = '‰ª§Âíå' + (p_year - 2019 + 1);
+  return p_year + 'Âπ¥' + (p_date.getMonth()<9 ? '0' : '') + (p_date.getMonth()+1) + 'Êúà';
 }
 function SeiParseTime(x_value){
   var p_val = SeiTrim(SeiZenToHan(x_value));
@@ -1418,7 +1418,7 @@ function SeiParseTime(x_value){
     var p_time = p_val;
     var p_count = 0;
     var p_pos = 0, p_pos2 = 0;
-    while ((p_pos2 = p_time.indexOf(':', p_pos)) >= 0 || (p_pos2 = p_time.indexOf('ÅF', p_pos)) >= 0) {
+    while ((p_pos2 = p_time.indexOf(':', p_pos)) >= 0 || (p_pos2 = p_time.indexOf('Ôºö', p_pos)) >= 0) {
       if (p_count == 0) p_h = SeiParseInt(p_val.substring(p_pos, p_pos2));
       if (p_count == 1) p_m = SeiParseInt(p_val.substring(p_pos, p_pos2));
       if (p_count == 2) p_s = SeiParseInt(p_val.substring(p_pos, p_pos2));
@@ -1467,7 +1467,7 @@ function SeiParseTimeHM(x_value){
     var p_time = p_val;
     var p_count = 0;
     var p_pos = 0, p_pos2 = 0;
-    while ((p_pos2 = p_time.indexOf(':', p_pos )) >= 0 || (p_pos2 = p_time.indexOf('ÅF', p_pos)) >= 0) {
+    while ((p_pos2 = p_time.indexOf(':', p_pos )) >= 0 || (p_pos2 = p_time.indexOf('Ôºö', p_pos)) >= 0) {
       if (p_count == 0) p_h = SeiParseInt(p_val.substring(p_pos, p_pos2));
       if (p_count == 1) p_m = SeiParseInt(p_val.substring(p_pos, p_pos2));
       p_pos = p_pos2 + 1;
@@ -1606,7 +1606,7 @@ function SeiCheckFileName(x_form) {
 function SeiCheckFileName2(x_form) {
   var p_ifile = SeiCheckFileName(x_form);
   if (p_ifile == null || p_ifile.length == 0) return true;
-  alert('ïsñæÇ»ÉtÉ@ÉCÉãñº: ' + p_ifile[0].value);
+  alert('‰∏çÊòé„Å™„Éï„Ç°„Ç§„É´Âêç: ' + p_ifile[0].value);
   return false;
 }
 function SeiCheckFileName3(x_form) {
@@ -1664,7 +1664,7 @@ function SeiJump2( x_target, x_url ) {
 }
 function SeiInvalidateScreen(x_cursor, x_msg) {
   if (typeof x_cursor == 'undefined') x_cursor = 'wait';
-  if (typeof x_msg == 'undefined') x_msg = 'ÇµÇŒÇÁÇ≠Ç®ë“Çøâ∫Ç≥Ç¢ÅB';
+  if (typeof x_msg == 'undefined') x_msg = '„Åó„Å∞„Çâ„Åè„ÅäÂæÖ„Å°‰∏ã„Åï„ÅÑ„ÄÇ';
   document.body.style.cursor = x_cursor;
   document.body.title = x_msg;
   function _invalidate(x_input, x_len, x_pos) {

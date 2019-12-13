@@ -277,7 +277,7 @@ RakUtil.clone = function(x_obj) {
 };
 RakUtil.trim = function(x_str) {
 	if (typeof(x_str) == 'string') {
-		return x_str.replace(/^[\s@]+|[\s@]+$/g, '');
+		return x_str.replace(/^[\sã€€]+|[\sã€€]+$/g, '');
 	} else {
 		return '';
 	}
