@@ -6,7 +6,7 @@ const video = document.getElementById("video");
 const promise = navigator.mediaDevices.getUserMedia(medias);
 
 promise.then(successCallback)
-       .then(errorCallback);
+       .catch(errorCallback);
 
 function successCallback(stream) {
   video.srcObject = stream;
