@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!--
-  <meta charset="UTF-8" />
-  <title>Video</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
--->
   <META content="IE=11.0000" http-equiv="X-UA-Compatible">
   <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
   <meta http-equiv="X-UA-Compatible" content="requiresActiveX=true">
@@ -15,11 +10,10 @@
   <title>カメラテスト</title>
   <link rel="stylesheet" href="camera.css" />
   <script src="camera.js"></script>
-  <!--
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  -->
 </head>
 <body>
-  <video id="video" autoplay playsinline></video>
+	<input id="take_pict_btn" onclick="take_pict()" type="button" value="撮影">
+	<input id="close_btn" onclick="popup_hide()" type="button" value="閉じる">
+	<video id="video" style="background: black; width: 100%; display: block;" autoplay="" playsinline="true"></video>
 </body>
 </html>
