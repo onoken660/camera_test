@@ -25,3 +25,13 @@ function successCallback(stream) {
 function errorCallback(err) {
   alert(err);
 };
+
+function popup_show() {
+  alert('popup_show()');
+}
+function popup_hide() {
+  alert('popup_hide()');
+}
+function take_pict() {
+  alert('take_pict()');
+}
