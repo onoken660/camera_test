@@ -8,10 +8,7 @@ function popup_hide() {
 }
 const medias = {
 	audio: false,
-	video: {
-		width: { min:320, ideal: 1280, max: 1920},
-		facingMode: {exact:"user"}	
-	}
+	video: true
 };
 function init_video() {
 alert('0');
