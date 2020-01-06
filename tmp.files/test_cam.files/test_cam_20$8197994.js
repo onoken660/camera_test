@@ -4,6 +4,24 @@ console.log = function() {
 	alert(arguments[i]);
     }
 };
+console.info = function() {
+    alert('console.log called');
+    for (var i in arguments) {
+	alert(arguments[i]);
+    }
+};
+console.warn = function() {
+    alert('console.log called');
+    for (var i in arguments) {
+	alert(arguments[i]);
+    }
+};
+console.error = function() {
+    alert('console.log called');
+    for (var i in arguments) {
+	alert(arguments[i]);
+    }
+};
 
 function popup_show() {
 	document.getElementById('layer').style.display = 'block';
