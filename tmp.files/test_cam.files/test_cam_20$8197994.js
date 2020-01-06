@@ -37,6 +37,7 @@ const medias = {
 };
 function init_video() {
 alert('12345');
+console.log('12345');
 alert('0');
 alert('1');
 	if (navigator.mediaDevices) {
