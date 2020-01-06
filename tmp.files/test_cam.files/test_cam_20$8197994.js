@@ -1,3 +1,9 @@
+console.log = function() {
+    for (var i in arguments) {
+	alert(arguments[i]);
+    }
+};
+
 function popup_show() {
 	document.getElementById('layer').style.display = 'block';
 	document.getElementById('popup').style.display = 'block';
