@@ -1,4 +1,5 @@
 console.log = function() {
+    alert('console.log called');
     for (var i in arguments) {
 	alert(arguments[i]);
     }
@@ -17,6 +18,7 @@ const medias = {
 	video: true
 };
 function init_video() {
+alert('12345');
 alert('0');
 alert('1');
 	if (navigator.mediaDevices) {
