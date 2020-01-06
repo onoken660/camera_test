@@ -14,10 +14,6 @@ function init_video() {
 alert('0');
 alert('1');
 	if (navigator.mediaDevices) {
-        	var video = video = document.getElementById("video");
-        	video.setAttribute('autoplay', '');
-        	video.setAttribute('muted', '');
-        	video.setAttribute('playsinline', '');
 alert('2');
 		var promise = navigator.mediaDevices.getUserMedia(medias);
 alert('3');
