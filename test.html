@@ -1,0 +1,38 @@
+<html>
+<head>
+  <meta charset='Shift_JIS' />
+  <title>Video</title>
+</head>
+<body>
+  <input id='take_pict_btn' type='button' style='width:15%;padding:10px;font-size:20px;' value='撮影' onclick='take_pict()'>
+  <input id='close_btn' type='button' style='width:15%;padding:10px;font-size:20px;' value='閉じる' onclick='window.close()'>
+  <video id='video' autoplay playsinline style='display: block; width: 100%;    background: black;'></video></div>
+  <input id='vd_mod_flag' type='text'>
+  <input id='vd_pos_inf' type='text'>
+<script language='JavaScript' type='text/javascript'>
+
+function take_pict() {
+    var mod_flag = document.getElementById('vd_mod_flag');
+    var pos_inf = document.getElementById('vd_pos_inf');
+
+    function success(position) {
+      const latitude  = position.coords.latitude;
+      const longitude = position.coords.longitude;
+
+      pos_inf.value = 'Latitude: ' + latitude + 'Longitude: ' + longitude;
+    }
+
+    function error0() {
+      pos_inf.value = 'Error';
+    }
+
+    mod_flag.value = 1;
+    if(!navigator.geolocation) {
+      pos_inf.value = 'Not Support';
+    } else {
+      navigator.geolocation.getCurrentPosition(success, error0);
+    }
+}
+</script>
+</body>
+</html>
