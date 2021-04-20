@@ -18,7 +18,7 @@ function errorCallback(err) {
     alert(err);
 }
 
-function getCurrentPosition(options) {
+async function getCurrentPosition(options) {
   return new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(resolve, reject, options)
   });
