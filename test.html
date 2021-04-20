@@ -59,7 +59,7 @@ function take_pict() {
      pos_inf.value = 'Not Support';
    } else {
       try {
-        var position = await this.getCurrentPosition();
+        var position = await getCurrentPosition();
         var latitude  = position.coords.latitude;
         var longitude = position.coords.longitude;
         pos_inf.value = pos_inf.value = 'Latitude: ' + latitude + ', Longitude: ' + longitude;
