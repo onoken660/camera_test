@@ -18,6 +18,11 @@ function errorCallback(err) {
     alert(err);
 }
 
+getCurrentPosition(options) {
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(resolve, reject, options)
+  })
+}
 
 function take_pict() {
     var camera = document.getElementById('video');
@@ -49,17 +54,20 @@ function take_pict() {
     } catch(error) {
         alert(error);
     }
-    mod_flag.value = 1;
-    if(!navigator.geolocation) {
-      pos_inf.value = 'Not Support';
-    } else {
+   mod_flag.value = 1;
+   if(!navigator.geolocation) {
+     pos_inf.value = 'Not Support';
+   } else {
       try {
-        navigator.geolocation.getCurrentPosition(success, error0);
+        var position = await this.getCurrentPosition();
+        var latitude  = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        pos_inf.value = pos_inf.value = 'Latitude: ' + latitude + ', Longitude: ' + longitude;
       } catch(error) {
-          alert(error);
+        alert(error);
       }
-    }
-    window.close();
+   }
+   window.close();
 }
 </script>
 </head>
