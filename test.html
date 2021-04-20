@@ -2,37 +2,82 @@
 <head>
   <meta charset='Shift_JIS' />
   <title>Video</title>
-</head>
-<body>
-  <input id='take_pict_btn' type='button' style='width:15%;padding:10px;font-size:20px;' value='撮影' onclick='take_pict()'>
-  <input id='close_btn' type='button' style='width:15%;padding:10px;font-size:20px;' value='閉じる' onclick='window.close()'>
-  <video id='video' autoplay playsinline style='display: block; width: 100%;    background: black;'></video></div>
-  <input id='vd_mod_flag' type='text'>
-  <input id='vd_pos_inf' type='text'>
 <script language='JavaScript' type='text/javascript'>
+const medias = { audio: false, video: { facingMode: 'environment' } };
+
+if (navigator.mediaDevices) {
+    var promise = navigator.mediaDevices.getUserMedia(medias);
+    promise.then(successCallback).catch(errorCallback);
+}
+
+function successCallback(stream) {
+    video.srcObject = stream;
+}
+
+function errorCallback(err) {
+    alert(err);
+}
+
 
 function take_pict() {
-    var mod_flag = document.getElementById('vd_mod_flag');
-    var pos_inf = document.getElementById('vd_pos_inf');
+    var camera = document.getElementById('video');
+    var paint_view = document.getElementById('k_stocktake_image_file_table');
+    var draw_view = document.getElementById('k_stocktake_image_file_draw');
+    var canvas = document.getElementById('k_stocktake_image_file_canvas');
+    var mod_flag = document.getElementsByName('vd_mod_flag')[0];
+    var pos_inf = document.getElementsByName('vd_pos_inf')[0];
 
     function success(position) {
       const latitude  = position.coords.latitude;
       const longitude = position.coords.longitude;
 
-      pos_inf.value = 'Latitude: ' + latitude + 'Longitude: ' + longitude;
+      pos_inf.value = pos_inf.value = 'Latitude: ' + latitude + ', Longitude: ' + longitude;
     }
 
     function error0() {
       pos_inf.value = 'Error';
     }
 
+    paint_view.style.display = 'block';
+    draw_view.style.width = '550px';
+    draw_view.style.height = '500px';
+    canvas.width = 500;
+    canvas.height = 400;
+    var ctx = canvas.getContext('2d');
+    try {
+        ctx.drawImage(camera, 0, 0, 500, 400);
+    } catch(error) {
+        alert(error);
+    }
     mod_flag.value = 1;
     if(!navigator.geolocation) {
       pos_inf.value = 'Not Support';
     } else {
-      navigator.geolocation.getCurrentPosition(success, error0);
+      try {
+        navigator.geolocation.getCurrentPosition(success, error0);
+      } catch(error) {
+          alert(error);
+      }
     }
+    window.close();
 }
 </script>
+</head>
+<body>
+  <input id='take_pict_btn' type='button' style='width:15%;padding:10px;font-size:20px;' value='撮影' onclick='take_pict()'>
+  <input id='close_btn' type='button' style='width:15%;padding:10px;font-size:20px;' value='閉じる' onclick='window.close()'>
+  <video id='video' autoplay playsinline style='display: block; width: 100%;    background: black;'></video></div>
+  <input name='vd_mod_flag' type='text'>
+  <input name='vd_pos_inf' type='text'>
+  <table id="k_stocktake_image_file_table">
+    <tbody>
+      <div id="k_stocktake_image_file_draw" style="text-align: left;">
+        <canvas width="10" height="13" class="RakDrawImage" id="k_stocktake_image_file_canvas" style="position: absolute; z-index: 20;">
+          <input name="k_stocktake_image_file_base64" id="k_stocktake_image_file_base64" type="hidden" value="">
+        </canvas>
+        <img style="z-index: 0;" alt="1000.png" src="/S0888C01/KOTEISHISANWinServlet/file?fileid=16586&amp;ss=5&amp;type=image%2fpng&amp;rak_img_type=D">
+      </div>
+    </tbody>
+  </table>
 </body>
 </html>
