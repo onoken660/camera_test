@@ -58,14 +58,18 @@ function take_pict() {
    if(!navigator.geolocation) {
      pos_inf.value = 'Not Support';
    } else {
-      try {
-        let position = await getCurrentPosition();
-        var latitude  = position.coords.latitude;
-        var longitude = position.coords.longitude;
-        pos_inf.value = pos_inf.value = 'Latitude: ' + latitude + ', Longitude: ' + longitude;
-      } catch(error) {
-        alert(error);
-      }
+        var getPosition = function (options) {
+          return new Promise(function (resolve, reject) {
+            navigator.geolocation.getCurrentPosition(resolve, reject, options);
+          });
+        }
+        getPosition().then((position) => {
+          var latitude  = position.coords.latitude;
+          var longitude = position.coords.longitude;
+          pos_inf.value = pos_inf.value = 'Latitude: ' + latitude + ', Longitude: ' + longitude;
+        }).catch((err) => {
+          alert(error);
+        });
    }
    window.close();
 }
