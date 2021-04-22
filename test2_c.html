@@ -1,0 +1,77 @@
+<html>
+<head>
+  <meta charset='Shift_JIS' />
+  <title>Video</title>
+<script language='JavaScript' type='text/javascript'>
+const medias = { audio: false, video: { facingMode: 'environment' } };
+
+if (navigator.mediaDevices) {
+    var promise = navigator.mediaDevices.getUserMedia(medias);
+    promise.then(successCallback).catch(errorCallback);
+}
+
+function successCallback(stream) {
+    video.srcObject = stream;
+}
+
+function errorCallback(err) {
+    alert(err);
+}
+
+function take_pict() {
+    var camera = document.getElementById('video');
+    var paint_view = opener.document.getElementById('k_stocktake_image_file_table');
+    var draw_view = opener.document.getElementById('k_stocktake_image_file_draw');
+    var canvas = opener.document.getElementById('k_stocktake_image_file_canvas');
+    var mod_flag = opener.document.getElementsByName('vd_mod_flag')[0];
+    var pos_inf = opener.document.getElementsByName('vd_pos_inf')[0];
+
+    function success(position) {
+      const latitude  = position.coords.latitude;
+      const longitude = position.coords.longitude;
+
+      pos_inf.value = pos_inf.value = 'Latitude: ' + latitude + ', Longitude: ' + longitude;
+    }
+
+    function error0() {
+      pos_inf.value = 'Error';
+    }
+
+    paint_view.style.display = 'block';
+    draw_view.style.width = '550px';
+    draw_view.style.height = '500px';
+    canvas.width = 500;
+    canvas.height = 400;
+    var ctx = canvas.getContext('2d');
+    try {
+        ctx.drawImage(camera, 0, 0, 500, 400);
+    } catch(error) {
+        alert(error);
+    }
+   mod_flag.value = 1;
+   if(!navigator.geolocation) {
+     pos_inf.value = 'Not Support';
+   } else {
+        var getPosition = function (options) {
+          return new Promise(function (resolve, reject) {
+            navigator.geolocation.getCurrentPosition(resolve, reject, options);
+          });
+        }
+        getPosition().then((position) => {
+          var latitude  = position.coords.latitude;
+          var longitude = position.coords.longitude;
+          pos_inf.value = pos_inf.value = 'Latitude: ' + latitude + ', Longitude: ' + longitude;
+        }).catch((err) => {
+          alert(error);
+        });
+   }
+   window.close();
+}
+</script>
+</head>
+<body>
+  <input id='take_pict_btn' type='button' style='width:15%;padding:10px;font-size:20px;' value='撮影' onclick='take_pict()'>
+  <input id='close_btn' type='button' style='width:15%;padding:10px;font-size:20px;' value='閉じる' onclick='window.close()'>
+  <video id='video' autoplay playsinline style='display: block; width: 100%;    background: black;'></video></div>
+</body>
+</html>

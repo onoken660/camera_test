@@ -1,0 +1,107 @@
+<html>
+<head>
+  <meta charset='Shift_JIS' />
+  <title>Video</title>
+<script>
+var popwin;
+function popup_show_k_stocktake_image_file() {
+	popwin = window.open("", "popup_windowk_stocktake_image_file", "width=200,height=100");
+	popwin.document.open();
+	popwin.document.writeln("<html>");
+	popwin.document.writeln("<head>");
+	popwin.document.writeln("  <meta charset='Shift_JIS' \/>");
+	popwin.document.writeln("  <title>Video<\/title>");
+	popwin.document.writeln("<script language='JavaScript' type='text/javascript'>");
+	popwin.document.writeln("const medias = { audio: false, video: { facingMode: 'environment' } };");
+	popwin.document.writeln("");
+	popwin.document.writeln("if (navigator.mediaDevices) {");
+	popwin.document.writeln("    var promise = navigator.mediaDevices.getUserMedia(medias);");
+	popwin.document.writeln("    promise.then(successCallback).catch(errorCallback);");
+	popwin.document.writeln("}");
+	popwin.document.writeln("");
+	popwin.document.writeln("function successCallback(stream) {");
+	popwin.document.writeln("    video.srcObject = stream;");
+	popwin.document.writeln("}");
+	popwin.document.writeln("");
+	popwin.document.writeln("function errorCallback(err) {");
+	popwin.document.writeln("    alert(err);");
+	popwin.document.writeln("}");
+	popwin.document.writeln("");
+	popwin.document.writeln("");
+	popwin.document.writeln("function take_pict() {");
+	popwin.document.writeln("    var camera = document.getElementById('video');");
+	popwin.document.writeln("    var paint_view = opener.document.getElementById('k_stocktake_image_file_table');");
+	popwin.document.writeln("    var draw_view = opener.document.getElementById('k_stocktake_image_file_draw');");
+	popwin.document.writeln("    var canvas = opener.document.getElementById('k_stocktake_image_file_canvas');");
+	popwin.document.writeln("    var mod_flag = window.opener.document.getElementsByName('vd_mod_flag')[0];");
+	popwin.document.writeln("    var pos_inf = window.opener.document.getElementsByName('vd_pos_inf')[0];");
+	popwin.document.writeln("");
+	popwin.document.writeln("    function success(position) {");
+	popwin.document.writeln("      const latitude  = position.coords.latitude;");
+	popwin.document.writeln("      const longitude = position.coords.longitude;");
+	popwin.document.writeln("");
+	popwin.document.writeln("      pos_inf.value = pos_inf.value = 'Latitude: ' + latitude + ', Longitude: ' + longitude;");
+	popwin.document.writeln("    }");
+	popwin.document.writeln("");
+	popwin.document.writeln("    function error0() {");
+	popwin.document.writeln("      pos_inf.value = 'Error';");
+	popwin.document.writeln("    }");
+	popwin.document.writeln("");
+	popwin.document.writeln("    paint_view.style.display = 'block';");
+	popwin.document.writeln("    draw_view.style.width = '550px';");
+	popwin.document.writeln("    draw_view.style.height = '500px';");
+	popwin.document.writeln("    canvas.width = 500;");
+	popwin.document.writeln("    canvas.height = 400;");
+	popwin.document.writeln("    var ctx = canvas.getContext('2d');");
+	popwin.document.writeln("    try {");
+	popwin.document.writeln("        ctx.drawImage(camera, 0, 0, 500, 400);");
+	popwin.document.writeln("    } catch(error) {");
+	popwin.document.writeln("        alert(error);");
+	popwin.document.writeln("    }");
+	popwin.document.writeln("    mod_flag.value = 1;");
+	popwin.document.writeln("   if(!navigator.geolocation) {");
+	popwin.document.writeln("     pos_inf.value = 'Not Support';");
+	popwin.document.writeln("   } else {");
+	popwin.document.writeln("     var getPosition = function (options) {");
+	popwin.document.writeln("       return new Promise(function (resolve, reject) {");
+	popwin.document.writeln("         navigator.geolocation.getCurrentPosition(resolve, reject, options);");
+	popwin.document.writeln("       });");
+	popwin.document.writeln("     }");
+	popwin.document.writeln("     getPosition().then((position) => {");
+	popwin.document.writeln("       var latitude  = position.coords.latitude;");
+	popwin.document.writeln("       var longitude = position.coords.longitude;");
+	popwin.document.writeln("       pos_inf.value = pos_inf.value = 'Latitude: ' + latitude + ', Longitude: ' + longitude;");
+	popwin.document.writeln("     }).catch((err) => {");
+	popwin.document.writeln("       alert(error);");
+	popwin.document.writeln("     });");
+	popwin.document.writeln("   }");
+	popwin.document.writeln("    window.close();");
+	popwin.document.writeln("}");
+	popwin.document.writeln("<\/script>");
+	popwin.document.writeln("<\/head>");
+	popwin.document.writeln("<body>");
+	popwin.document.writeln("  <input id='take_pict_btn' type='button' style='width:15%;padding:10px;font-size:20px;' value='撮影' onclick='take_pict()'>");
+	popwin.document.writeln("  <input id='close_btn' type='button' style='width:15%;padding:10px;font-size:20px;' value='閉じる' onclick='window.close()'>");
+	popwin.document.writeln("  <video id='video' autoplay playsinline style='display: block; width: 100%;    background: black;'><\/video><\/div>");
+	popwin.document.writeln("<\/body>");
+	popwin.document.writeln("<\/html>");
+	popwin.document.close();
+}
+</script>
+</head>
+<body>
+  <input name="camera_btn_k_stocktake_image_file" onclick="popup_show_k_stocktake_image_file();" type="button" size="20" maxlength="20" value="カメラ撮影">
+  <input name='vd_mod_flag' type='text'>
+  <input name='vd_pos_inf' type='text' size='40'>
+  <table id="k_stocktake_image_file_table">
+    <tbody>
+      <div id="k_stocktake_image_file_draw" style="text-align: left;">
+        <canvas width="10" height="13" class="RakDrawImage" id="k_stocktake_image_file_canvas" style="position: absolute; z-index: 20;">
+          <input name="k_stocktake_image_file_base64" id="k_stocktake_image_file_base64" type="hidden" value="">
+        </canvas>
+        <img style="z-index: 0;" alt="1000.png" src="./file.png">
+      </div>
+    </tbody>
+  </table>
+</body>
+</html>
